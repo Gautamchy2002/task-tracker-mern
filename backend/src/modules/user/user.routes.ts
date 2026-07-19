@@ -10,7 +10,7 @@ const userRouter = Router();
 
 userRouter.use(authenticate);
 
-userRouter.get("/", authorize("ADMIN"), list);
+userRouter.get("/", authorize("ADMIN", "MANAGER"), list);
 
 userRouter.post("/", authorize("ADMIN"), create);
 
