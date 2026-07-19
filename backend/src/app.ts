@@ -23,17 +23,39 @@ app.use(helmet());
  * CORS frontend ko backend APIs call karne ki permission deta hai.
  * Development me frontend localhost:5173 par chalega.
  */
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:3000",
-  "https://task-tracker-mern-roan.vercel.app",
-];
+// const allowedOrigins = [
+//   "http://localhost:5173",
+//   "http://localhost:3000",
+//   "https://task-tracker-mern-roan.vercel.app",
+// ];
+
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       // Postman, curl aur server-to-server requests me origin absent ho sakta hai
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//         return;
+//       }
+
+//       callback(new Error(`CORS blocked for origin: ${origin}`));
+//     },
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   }),
+// );
+
+const allowedOrigins = ["https://task-tracker-mern-roan.vercel.app"];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Postman, curl aur server-to-server requests me origin absent ho sakta hai
-      if (!origin || allowedOrigins.includes(origin)) {
+      const isLocalhost =
+        origin?.startsWith("http://localhost:") ||
+        origin?.startsWith("http://127.0.0.1:");
+
+      if (!origin || isLocalhost || allowedOrigins.includes(origin)) {
         callback(null, true);
         return;
       }
