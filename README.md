@@ -461,8 +461,6 @@ npx prisma migrate deploy
 
 ## Notes
 
-This project was developed as part of the **Goolluck Consulting LLP MERN Stack Technical Assignment**.
-
 The implementation follows a clean architecture using:
 
 - Controller
